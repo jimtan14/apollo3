@@ -16,11 +16,8 @@
             --off-white: #F8FFFA;
             --near-black: #000d05;
             --green-50: #f8fffb;
-            --green-100: #dfeae3;
-            --green-200: #CCFFE0;
             --green-500: #008c44;
             --green-600: #002910;
-            --interaction: #00ff64;
             --accent-label: #EEFF8C;
             --accent-highlight: #00e676;
             --text-primary: #09090b;
@@ -43,94 +40,22 @@
             line-height: 1.5;
         }
 
-        /* ── Header ── */
-        .header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: 48px;
-        }
+        .header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 48px; }
         .header-left { display: flex; flex-direction: column; gap: 4px; }
         .logo svg { height: 28px; width: auto; }
-        .header h1 {
-            font-family: var(--font-serif);
-            font-size: 40px;
-            font-weight: 400;
-            letter-spacing: -0.02em;
-            line-height: 1.04;
-            color: var(--near-black);
-            margin-top: 16px;
-        }
-        .header .subtitle {
-            font-family: var(--font-sans);
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-top: 4px;
-        }
-        .pill {
-            display: inline-flex;
-            align-items: center;
-            padding: 4px 10px;
-            background: var(--accent-label);
-            border: 1px solid var(--stroke-green);
-            border-radius: 0;
-            font-family: var(--font-mono);
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--near-black);
-            white-space: nowrap;
-        }
+        .header h1 { font-family: var(--font-serif); font-size: 40px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.04; color: var(--near-black); margin-top: 16px; }
+        .header .subtitle { font-family: var(--font-sans); font-size: 14px; color: var(--text-secondary); margin-top: 4px; }
+        .pill { display: inline-flex; align-items: center; padding: 4px 10px; background: var(--accent-label); border: 1px solid var(--stroke-green); border-radius: 0; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--near-black); white-space: nowrap; }
 
-        /* ── Table Section ── */
-        .table-section {
-            background: var(--white);
-            border: 1px solid var(--stroke-green);
-            border-radius: 0;
-            overflow: hidden;
-            margin-bottom: 32px;
-        }
-        .table-header {
-            padding: 24px;
-            border-bottom: 1px solid var(--stroke-green);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .table-header h2 {
-            font-family: var(--font-serif);
-            font-size: 28px;
-            font-weight: 400;
-            letter-spacing: -0.02em;
-            color: var(--near-black);
-        }
+        .table-section { background: var(--white); border: 1px solid var(--stroke-green); border-radius: 0; overflow: hidden; margin-bottom: 32px; }
+        .table-header { padding: 24px; border-bottom: 1px solid var(--stroke-green); display: flex; align-items: center; justify-content: space-between; }
+        .table-header h2 { font-family: var(--font-serif); font-size: 28px; font-weight: 400; letter-spacing: -0.02em; color: var(--near-black); }
         .table-wrap { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; min-width: 900px; }
-        thead th {
-            text-align: left;
-            padding: 12px 20px;
-            font-family: var(--font-mono);
-            font-size: 11px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-secondary);
-            background: var(--green-50);
-            border-bottom: 1px solid var(--stroke-green);
-        }
+        table { width: 100%; border-collapse: collapse; min-width: 1400px; }
+        thead th { text-align: left; padding: 12px 14px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary); background: var(--green-50); border-bottom: 1px solid var(--stroke-green); white-space: nowrap; }
         thead th:not(:first-child) { text-align: right; }
-        tbody td {
-            padding: 14px 20px;
-            font-family: var(--font-sans);
-            font-size: 14px;
-            color: var(--text-primary);
-            border-bottom: 1px solid var(--stroke-primary);
-        }
-        tbody td:not(:first-child) {
-            text-align: right;
-            font-variant-numeric: tabular-nums;
-        }
+        tbody td { padding: 13px 14px; font-family: var(--font-sans); font-size: 13px; color: var(--text-primary); border-bottom: 1px solid var(--stroke-primary); }
+        tbody td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
         tbody tr:hover { background: var(--green-50); }
         tbody tr:last-child td { border-bottom: none; }
         td.campaign { font-weight: 500; color: var(--near-black); white-space: nowrap; }
@@ -138,40 +63,18 @@
         td.lead-val { color: var(--near-black); font-weight: 600; }
         td.mql-val { color: var(--green-500); font-weight: 600; }
         td.s1-val { color: var(--text-secondary); font-weight: 500; }
+        td.rate { color: var(--text-secondary); }
+        td.cost-metric { color: var(--near-black); }
 
-        /* ── Totals Row ── */
         tbody tr.totals-row { background: var(--green-600); }
-        tbody tr.totals-row td {
-            color: var(--white);
-            font-weight: 700;
-            border-top: 2px solid var(--stroke-green);
-            border-bottom: none;
-            padding-top: 18px;
-            padding-bottom: 18px;
-        }
+        tbody tr.totals-row td { color: var(--white); font-weight: 700; border-top: 2px solid var(--stroke-green); border-bottom: none; padding-top: 18px; padding-bottom: 18px; }
         tbody tr.totals-row td.spend { color: var(--accent-highlight); }
-        tbody tr.totals-row td.lead-val,
-        tbody tr.totals-row td.mql-val,
-        tbody tr.totals-row td.s1-val { color: var(--white); }
+        tbody tr.totals-row td.lead-val, tbody tr.totals-row td.mql-val, tbody tr.totals-row td.s1-val, tbody tr.totals-row td.rate, tbody tr.totals-row td.cost-metric { color: var(--white); }
         tbody tr.totals-row:hover { background: var(--green-600); }
 
-        /* ── Footer ── */
-        .footer {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-family: var(--font-mono);
-            font-size: 11px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-tertiary);
-            padding-top: 16px;
-        }
+        .footer { display: flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-tertiary); padding-top: 16px; }
         .footer .dot { width: 3px; height: 3px; background: var(--text-tertiary); display: inline-block; }
 
-        /* ── Responsive ── */
         @media (max-width: 768px) {
             body { padding: 16px; }
             .header { flex-direction: column; gap: 12px; }
@@ -182,7 +85,6 @@
 </head>
 <body>
 
-    <!-- Header -->
     <div class="header">
         <div class="header-left">
             <div class="logo">
@@ -202,9 +104,7 @@
         <div class="pill">Updated Feb 25, 2026</div>
     </div>
 
-    <!-- ════════════════════════════════════ -->
-    <!-- Feb 2026                             -->
-    <!-- ════════════════════════════════════ -->
+    <!-- ═══════════ Feb 2026 ═══════════ -->
     <div class="table-section">
         <div class="table-header">
             <h2>February 2026</h2>
@@ -218,8 +118,13 @@
                         <th>Spend</th>
                         <th>Impressions</th>
                         <th>Clicks</th>
+                        <th>CTR</th>
                         <th>Lead</th>
+                        <th>CVR</th>
+                        <th>CPL</th>
                         <th>MQL</th>
+                        <th>MQL CVR</th>
+                        <th>CPMQL</th>
                         <th>S1</th>
                     </tr>
                 </thead>
@@ -229,8 +134,13 @@
                         <td class="spend">$2,828.43</td>
                         <td>4,311</td>
                         <td>1,213</td>
+                        <td class="rate">28.14%</td>
                         <td class="lead-val">75.5</td>
+                        <td class="rate">6.22%</td>
+                        <td class="cost-metric">$37.46</td>
                         <td class="mql-val">15.5</td>
+                        <td class="rate">20.53%</td>
+                        <td class="cost-metric">$182.48</td>
                         <td class="s1-val">21.0</td>
                     </tr>
                     <tr>
@@ -238,8 +148,13 @@
                         <td class="spend">$2,750.36</td>
                         <td>6,864</td>
                         <td>202</td>
+                        <td class="rate">2.94%</td>
                         <td class="lead-val">6.0</td>
+                        <td class="rate">2.97%</td>
+                        <td class="cost-metric">$458.39</td>
                         <td class="mql-val">2.0</td>
+                        <td class="rate">33.33%</td>
+                        <td class="cost-metric">$1,375.18</td>
                         <td class="s1-val">1.0</td>
                     </tr>
                     <tr>
@@ -247,8 +162,13 @@
                         <td class="spend">$2,202.79</td>
                         <td>5,776</td>
                         <td>346</td>
+                        <td class="rate">5.99%</td>
                         <td class="lead-val">17.0</td>
+                        <td class="rate">4.91%</td>
+                        <td class="cost-metric">$129.58</td>
                         <td class="mql-val">3.0</td>
+                        <td class="rate">17.65%</td>
+                        <td class="cost-metric">$734.26</td>
                         <td class="s1-val">2.0</td>
                     </tr>
                     <tr>
@@ -256,8 +176,13 @@
                         <td class="spend">$2,781.81</td>
                         <td>14,126</td>
                         <td>598</td>
+                        <td class="rate">4.23%</td>
                         <td class="lead-val">26.5</td>
+                        <td class="rate">4.43%</td>
+                        <td class="cost-metric">$104.97</td>
                         <td class="mql-val">2.0</td>
+                        <td class="rate">7.55%</td>
+                        <td class="cost-metric">$1,390.91</td>
                         <td class="s1-val">1.0</td>
                     </tr>
                     <tr>
@@ -265,8 +190,13 @@
                         <td class="spend">$14,976.77</td>
                         <td>11,329</td>
                         <td>2,808</td>
+                        <td class="rate">24.78%</td>
                         <td class="lead-val">188.5</td>
+                        <td class="rate">6.71%</td>
+                        <td class="cost-metric">$79.45</td>
                         <td class="mql-val">36.7</td>
+                        <td class="rate">19.47%</td>
+                        <td class="cost-metric">$408.09</td>
                         <td class="s1-val">60.7</td>
                     </tr>
                     <tr>
@@ -274,8 +204,13 @@
                         <td class="spend">$8,402.03</td>
                         <td>10,533</td>
                         <td>305</td>
+                        <td class="rate">2.90%</td>
                         <td class="lead-val">8.0</td>
+                        <td class="rate">2.62%</td>
+                        <td class="cost-metric">$1,050.25</td>
                         <td class="mql-val">5.1</td>
+                        <td class="rate">63.75%</td>
+                        <td class="cost-metric">$1,647.46</td>
                         <td class="s1-val">4.5</td>
                     </tr>
                     <tr>
@@ -283,8 +218,13 @@
                         <td class="spend">$4,756.99</td>
                         <td>7,619</td>
                         <td>353</td>
+                        <td class="rate">4.63%</td>
                         <td class="lead-val">22.5</td>
+                        <td class="rate">6.37%</td>
+                        <td class="cost-metric">$211.42</td>
                         <td class="mql-val">2.0</td>
+                        <td class="rate">8.89%</td>
+                        <td class="cost-metric">$2,378.50</td>
                         <td class="s1-val">1.0</td>
                     </tr>
                     <tr>
@@ -292,8 +232,13 @@
                         <td class="spend">$5,968.95</td>
                         <td>16,977</td>
                         <td>507</td>
+                        <td class="rate">2.99%</td>
                         <td class="lead-val">28.0</td>
+                        <td class="rate">5.52%</td>
+                        <td class="cost-metric">$213.18</td>
                         <td class="mql-val">6.0</td>
+                        <td class="rate">21.43%</td>
+                        <td class="cost-metric">$994.83</td>
                         <td class="s1-val">4.4</td>
                     </tr>
                     <tr>
@@ -301,8 +246,13 @@
                         <td class="spend">$1,072.18</td>
                         <td>2,769</td>
                         <td>100</td>
+                        <td class="rate">3.61%</td>
                         <td class="lead-val">3.5</td>
+                        <td class="rate">3.50%</td>
+                        <td class="cost-metric">$306.34</td>
                         <td class="mql-val">1.0</td>
+                        <td class="rate">28.57%</td>
+                        <td class="cost-metric">$1,072.18</td>
                         <td class="s1-val">1.0</td>
                     </tr>
                     <tr>
@@ -310,8 +260,13 @@
                         <td class="spend">$1,576.46</td>
                         <td>2,572</td>
                         <td>82</td>
+                        <td class="rate">3.19%</td>
                         <td class="lead-val">2.0</td>
+                        <td class="rate">2.44%</td>
+                        <td class="cost-metric">$788.23</td>
                         <td class="mql-val">1.0</td>
+                        <td class="rate">50.00%</td>
+                        <td class="cost-metric">$1,576.46</td>
                         <td class="s1-val">2.6</td>
                     </tr>
                     <tr>
@@ -319,8 +274,13 @@
                         <td class="spend">$312.50</td>
                         <td>465</td>
                         <td>30</td>
+                        <td class="rate">6.45%</td>
                         <td class="lead-val">1.0</td>
+                        <td class="rate">3.33%</td>
+                        <td class="cost-metric">$312.50</td>
                         <td class="mql-val">0</td>
+                        <td class="rate">0%</td>
+                        <td class="cost-metric">--</td>
                         <td class="s1-val">0</td>
                     </tr>
                     <tr class="totals-row">
@@ -328,8 +288,13 @@
                         <td class="spend">$47,629.27</td>
                         <td>83,341</td>
                         <td>6,544</td>
+                        <td class="rate">7.85%</td>
                         <td class="lead-val">378.5</td>
+                        <td class="rate">5.78%</td>
+                        <td class="cost-metric">$125.84</td>
                         <td class="mql-val">74.3</td>
+                        <td class="rate">19.63%</td>
+                        <td class="cost-metric">$641.04</td>
                         <td class="s1-val">99.2</td>
                     </tr>
                 </tbody>
@@ -337,9 +302,7 @@
         </div>
     </div>
 
-    <!-- ════════════════════════════════════ -->
-    <!-- Jan 2026                             -->
-    <!-- ════════════════════════════════════ -->
+    <!-- ═══════════ Jan 2026 ═══════════ -->
     <div class="table-section">
         <div class="table-header">
             <h2>January 2026</h2>
@@ -353,8 +316,13 @@
                         <th>Spend</th>
                         <th>Impressions</th>
                         <th>Clicks</th>
+                        <th>CTR</th>
                         <th>Lead</th>
+                        <th>CVR</th>
+                        <th>CPL</th>
                         <th>MQL</th>
+                        <th>MQL CVR</th>
+                        <th>CPMQL</th>
                         <th>S1</th>
                     </tr>
                 </thead>
@@ -364,8 +332,13 @@
                         <td class="spend">$881.32</td>
                         <td>2,163</td>
                         <td>544</td>
+                        <td class="rate">25.15%</td>
                         <td class="lead-val">50.5</td>
+                        <td class="rate">9.28%</td>
+                        <td class="cost-metric">$17.45</td>
                         <td class="mql-val">16.5</td>
+                        <td class="rate">32.67%</td>
+                        <td class="cost-metric">$53.41</td>
                         <td class="s1-val">15.0</td>
                     </tr>
                     <tr>
@@ -373,8 +346,13 @@
                         <td class="spend">$1,129.67</td>
                         <td>3,156</td>
                         <td>115</td>
+                        <td class="rate">3.64%</td>
                         <td class="lead-val">5.0</td>
+                        <td class="rate">4.35%</td>
+                        <td class="cost-metric">$225.93</td>
                         <td class="mql-val">2.0</td>
+                        <td class="rate">40.00%</td>
+                        <td class="cost-metric">$564.84</td>
                         <td class="s1-val">1.0</td>
                     </tr>
                     <tr>
@@ -382,8 +360,13 @@
                         <td class="spend">$935.04</td>
                         <td>3,450</td>
                         <td>150</td>
+                        <td class="rate">4.35%</td>
                         <td class="lead-val">9.5</td>
+                        <td class="rate">6.33%</td>
+                        <td class="cost-metric">$98.43</td>
                         <td class="mql-val">1.0</td>
+                        <td class="rate">10.53%</td>
+                        <td class="cost-metric">$935.04</td>
                         <td class="s1-val">1.0</td>
                     </tr>
                     <tr>
@@ -391,8 +374,13 @@
                         <td class="spend">$1,163.09</td>
                         <td>6,556</td>
                         <td>280</td>
+                        <td class="rate">4.27%</td>
                         <td class="lead-val">13.0</td>
+                        <td class="rate">4.64%</td>
+                        <td class="cost-metric">$89.47</td>
                         <td class="mql-val">5.0</td>
+                        <td class="rate">38.46%</td>
+                        <td class="cost-metric">$232.62</td>
                         <td class="s1-val">2.0</td>
                     </tr>
                     <tr>
@@ -400,8 +388,13 @@
                         <td class="spend">$1,354.72</td>
                         <td>2,118</td>
                         <td>551</td>
+                        <td class="rate">26.02%</td>
                         <td class="lead-val">31.9</td>
+                        <td class="rate">5.79%</td>
+                        <td class="cost-metric">$42.47</td>
                         <td class="mql-val">11.0</td>
+                        <td class="rate">34.48%</td>
+                        <td class="cost-metric">$123.16</td>
                         <td class="s1-val">12.8</td>
                     </tr>
                     <tr>
@@ -409,8 +402,13 @@
                         <td class="spend">$1,277.28</td>
                         <td>2,138</td>
                         <td>70</td>
+                        <td class="rate">3.27%</td>
                         <td class="lead-val">4.0</td>
+                        <td class="rate">5.71%</td>
+                        <td class="cost-metric">$319.32</td>
                         <td class="mql-val">1.0</td>
+                        <td class="rate">25.00%</td>
+                        <td class="cost-metric">$1,277.28</td>
                         <td class="s1-val">2.0</td>
                     </tr>
                     <tr>
@@ -418,8 +416,13 @@
                         <td class="spend">$794.78</td>
                         <td>2,225</td>
                         <td>58</td>
+                        <td class="rate">2.61%</td>
                         <td class="lead-val">6.5</td>
+                        <td class="rate">11.21%</td>
+                        <td class="cost-metric">$122.27</td>
                         <td class="mql-val">1.0</td>
+                        <td class="rate">15.38%</td>
+                        <td class="cost-metric">$794.78</td>
                         <td class="s1-val">2.0</td>
                     </tr>
                     <tr>
@@ -427,8 +430,13 @@
                         <td class="spend">$840.36</td>
                         <td>4,014</td>
                         <td>83</td>
+                        <td class="rate">2.07%</td>
                         <td class="lead-val">5.0</td>
+                        <td class="rate">6.02%</td>
+                        <td class="cost-metric">$168.07</td>
                         <td class="mql-val">2.9</td>
+                        <td class="rate">58.00%</td>
+                        <td class="cost-metric">$289.78</td>
                         <td class="s1-val">2.9</td>
                     </tr>
                     <tr>
@@ -436,8 +444,13 @@
                         <td class="spend">$8,325.06</td>
                         <td>20,451</td>
                         <td>687</td>
+                        <td class="rate">3.36%</td>
                         <td class="lead-val">50.4</td>
+                        <td class="rate">7.34%</td>
+                        <td class="cost-metric">$165.18</td>
                         <td class="mql-val">10.6</td>
+                        <td class="rate">21.03%</td>
+                        <td class="cost-metric">$785.38</td>
                         <td class="s1-val">4.1</td>
                     </tr>
                     <tr>
@@ -445,8 +458,13 @@
                         <td class="spend">$155.61</td>
                         <td>374</td>
                         <td>7</td>
+                        <td class="rate">1.87%</td>
                         <td class="lead-val">0</td>
+                        <td class="rate">0%</td>
+                        <td class="cost-metric">--</td>
                         <td class="mql-val">0</td>
+                        <td class="rate">--</td>
+                        <td class="cost-metric">--</td>
                         <td class="s1-val">0</td>
                     </tr>
                     <tr>
@@ -454,8 +472,13 @@
                         <td class="spend">$4,439.51</td>
                         <td>11,941</td>
                         <td>2,711</td>
+                        <td class="rate">22.70%</td>
                         <td class="lead-val">196.3</td>
+                        <td class="rate">7.24%</td>
+                        <td class="cost-metric">$22.62</td>
                         <td class="mql-val">47.3</td>
+                        <td class="rate">24.10%</td>
+                        <td class="cost-metric">$93.86</td>
                         <td class="s1-val">71.7</td>
                     </tr>
                     <tr>
@@ -463,8 +486,13 @@
                         <td class="spend">$12,139.49</td>
                         <td>15,866</td>
                         <td>635</td>
+                        <td class="rate">4.00%</td>
                         <td class="lead-val">39.5</td>
+                        <td class="rate">6.22%</td>
+                        <td class="cost-metric">$307.33</td>
                         <td class="mql-val">13.0</td>
+                        <td class="rate">32.91%</td>
+                        <td class="cost-metric">$933.81</td>
                         <td class="s1-val">16.5</td>
                     </tr>
                     <tr>
@@ -472,8 +500,13 @@
                         <td class="spend">$2,408.13</td>
                         <td>3,943</td>
                         <td>244</td>
+                        <td class="rate">6.19%</td>
                         <td class="lead-val">24.0</td>
+                        <td class="rate">9.84%</td>
+                        <td class="cost-metric">$100.34</td>
                         <td class="mql-val">5.0</td>
+                        <td class="rate">20.83%</td>
+                        <td class="cost-metric">$481.63</td>
                         <td class="s1-val">3.0</td>
                     </tr>
                     <tr>
@@ -481,8 +514,13 @@
                         <td class="spend">$1,420.33</td>
                         <td>7,149</td>
                         <td>195</td>
+                        <td class="rate">2.73%</td>
                         <td class="lead-val">10.1</td>
+                        <td class="rate">5.18%</td>
+                        <td class="cost-metric">$140.63</td>
                         <td class="mql-val">0.4</td>
+                        <td class="rate">3.96%</td>
+                        <td class="cost-metric">$3,550.83</td>
                         <td class="s1-val">0</td>
                     </tr>
                     <tr class="totals-row">
@@ -490,8 +528,13 @@
                         <td class="spend">$37,264.39</td>
                         <td>85,544</td>
                         <td>6,330</td>
+                        <td class="rate">7.40%</td>
                         <td class="lead-val">445.7</td>
+                        <td class="rate">7.04%</td>
+                        <td class="cost-metric">$83.60</td>
                         <td class="mql-val">116.7</td>
+                        <td class="rate">26.19%</td>
+                        <td class="cost-metric">$319.32</td>
                         <td class="s1-val">134.0</td>
                     </tr>
                 </tbody>
@@ -499,7 +542,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <div class="footer">
         <span>Google Ads API</span>
         <span class="dot"></span>
