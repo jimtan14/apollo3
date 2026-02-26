@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly video + demand gen campaign report -- AirOps</title>
+    <style>
+        @font-face { font-family: 'Serrif VF'; src: url('fonts/SerrifVF.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+        @font-face { font-family: 'Saans'; src: url('fonts/Saans-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'Saans'; src: url('fonts/Saans-Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
+        @font-face { font-family: 'Saans'; src: url('fonts/Saans-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
+        @font-face { font-family: 'Saans Mono'; src: url('fonts/SaansMono-Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
+
+        :root {
+            --white: #ffffff;
+            --off-white: #F8FFFA;
+            --near-black: #000d05;
+            --green-50: #f8fffb;
+            --green-500: #008c44;
+            --green-600: #002910;
+            --accent-label: #EEFF8C;
+            --accent-highlight: #00e676;
+            --text-primary: #09090b;
+            --text-secondary: #676c79;
+            --text-tertiary: #a5aab6;
+            --stroke-primary: #ecedef;
+            --stroke-green: #d4e8da;
+            --font-sans: 'Saans', 'Helvetica Neue', sans-serif;
+            --font-serif: 'Serrif VF', Georgia, serif;
+            --font-mono: 'Saans Mono', 'DM Mono', monospace;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--off-white);
+            color: var(--text-primary);
+            padding: 48px;
+            line-height: 1.5;
+        }
+
+        .header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 48px; }
+        .header-left { display: flex; flex-direction: column; gap: 4px; }
+        .logo svg { height: 28px; width: auto; }
+        .header h1 { font-family: var(--font-serif); font-size: 40px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.04; color: var(--near-black); margin-top: 16px; }
+        .header .subtitle { font-family: var(--font-sans); font-size: 14px; color: var(--text-secondary); margin-top: 4px; }
+        .pill { display: inline-flex; align-items: center; padding: 4px 10px; background: var(--accent-label); border: 1px solid var(--stroke-green); border-radius: 0; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--near-black); white-space: nowrap; }
+
+        /* ── TL;DR ── */
+        .tldr { background: var(--green-600); border: 1px solid var(--stroke-green); border-radius: 0; padding: 32px; margin-bottom: 32px; color: var(--white); }
+        .tldr-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+        .tldr-header h2 { font-family: var(--font-serif); font-size: 28px; font-weight: 400; letter-spacing: -0.02em; color: var(--white); }
+        .tldr-header .pill-light { background: var(--accent-highlight); color: var(--near-black); border: none; }
+        .tldr-metrics { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 28px; }
+        .tldr-metric { background: rgba(255,255,255,0.08); padding: 16px 20px; border: 1px solid rgba(255,255,255,0.12); border-radius: 0; }
+        .tldr-metric .metric-label { font-family: var(--font-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+        .tldr-metric .metric-row { display: flex; align-items: baseline; gap: 8px; }
+        .tldr-metric .metric-value { font-family: var(--font-serif); font-size: 24px; font-weight: 400; letter-spacing: -0.02em; color: var(--white); }
+        .tldr-metric .metric-change { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; }
+        .tldr-metric .metric-change.up { color: var(--accent-highlight); }
+        .tldr-metric .metric-change.down { color: #ff6b6b; }
+        .tldr-metric .metric-sub { font-family: var(--font-sans); font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+        .tldr-focus { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px; }
+        .tldr-focus h3 { font-family: var(--font-sans); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent-highlight); margin-bottom: 16px; }
+        .focus-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .focus-list li { display: flex; gap: 12px; align-items: flex-start; }
+        .focus-num { font-family: var(--font-mono); font-size: 11px; font-weight: 500; background: var(--accent-highlight); color: var(--near-black); width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+        .focus-text { font-family: var(--font-sans); font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.85); }
+        .focus-text strong { color: var(--white); }
+
+        /* ── Tables ── */
+        .table-section { background: var(--white); border: 1px solid var(--stroke-green); border-radius: 0; overflow: hidden; margin-bottom: 32px; }
+        .table-header { padding: 24px; border-bottom: 1px solid var(--stroke-green); display: flex; align-items: center; justify-content: space-between; }
+        .table-header h2 { font-family: var(--font-serif); font-size: 28px; font-weight: 400; letter-spacing: -0.02em; color: var(--near-black); }
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 1400px; }
+        thead th { text-align: left; padding: 12px 14px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary); background: var(--green-50); border-bottom: 1px solid var(--stroke-green); white-space: nowrap; }
+        thead th:not(:first-child) { text-align: right; }
+        tbody td { padding: 13px 14px; font-family: var(--font-sans); font-size: 13px; color: var(--text-primary); border-bottom: 1px solid var(--stroke-primary); }
+        tbody td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+        tbody tr:hover { background: var(--green-50); }
+        tbody tr:last-child td { border-bottom: none; }
+        td.campaign { font-weight: 500; color: var(--near-black); white-space: nowrap; }
+        td.spend { color: var(--green-500); font-weight: 600; }
+        td.lead-val { color: var(--near-black); font-weight: 600; }
+        td.mql-val { color: var(--green-500); font-weight: 600; }
+        td.s1-val { color: var(--text-secondary); font-weight: 500; }
+        td.rate { color: var(--text-secondary); }
+        td.cost-metric { color: var(--near-black); }
+
+        tbody tr.totals-row { background: var(--green-600); }
+        tbody tr.totals-row td { color: var(--white); font-weight: 700; border-top: 2px solid var(--stroke-green); border-bottom: none; padding-top: 18px; padding-bottom: 18px; }
+        tbody tr.totals-row td.spend { color: var(--accent-highlight); }
+        tbody tr.totals-row td.lead-val, tbody tr.totals-row td.mql-val, tbody tr.totals-row td.s1-val, tbody tr.totals-row td.rate, tbody tr.totals-row td.cost-metric { color: var(--white); }
+        tbody tr.totals-row:hover { background: var(--green-600); }
+
+        .footer { display: flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-tertiary); padding-top: 16px; }
+        .footer .dot { width: 3px; height: 3px; background: var(--text-tertiary); display: inline-block; }
+
+        @media (max-width: 960px) { .tldr-metrics { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .header { flex-direction: column; gap: 12px; }
+            .header h1 { font-size: 28px; }
+            .table-header h2 { font-size: 22px; }
+            .tldr { padding: 20px; }
+            .tldr-metrics { grid-template-columns: 1fr; }
+            .tldr-metric .metric-value { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-left">
+            <div class="logo">
+                <svg viewBox="0 0 784 252" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M111.828 65.6415V88.4663C101.564 72.0112 85.627 61.9258 65.9084 61.9258C23.7703 61.9258 0 92.9782 0 134.647C0 176.581 24.0404 208.695 66.4487 208.695C86.1672 208.695 101.834 198.609 111.828 182.154V204.979H144.782V65.6415H111.828ZM72.9315 181.093C48.8911 181.093 35.1152 159.064 35.1152 134.647C35.1152 110.76 48.621 89.7933 73.4717 89.7933C94.0006 89.7933 111.558 104.391 111.558 134.116C111.558 163.31 94.8109 181.093 72.9315 181.093Z" fill="#001408"/>
+                    <path d="M173.137 65.6494V204.987H208.252V65.6494H173.137Z" fill="#001408"/>
+                    <path d="M272.998 100.141V65.6386H237.883V204.976H272.998V125.355C272.998 104.919 287.314 96.691 300.82 96.691C308.653 96.691 316.757 98.8143 321.079 100.407V63.25C298.119 63.25 279.211 76.7856 272.998 100.141Z" fill="#001408"/>
+                    <path d="M329.629 108.115C329.629 151.377 359.882 182.163 403.371 182.163C447.13 182.163 477.115 151.377 477.115 108.115C477.115 65.6507 447.13 35.3945 403.371 35.3945C359.882 35.3945 329.629 65.6507 329.629 108.115ZM441.997 108.115C441.997 135.187 427.141 154.561 403.371 154.561C379.33 154.561 364.744 135.187 364.744 108.115C364.744 82.1058 379.33 63.2621 403.371 63.2621C427.141 63.2621 441.997 82.1058 441.997 108.115Z" fill="#001408"/>
+                    <path d="M575.086 61.9258C554.557 61.9258 537.81 73.869 528.896 92.9782V65.6415H493.781V251.425H528.896V180.031C538.891 197.282 557.529 208.695 577.247 208.695C615.604 208.695 642.345 179.235 642.345 137.035C642.345 92.7128 614.523 61.9258 575.086 61.9258ZM568.874 182.685C545.374 182.685 528.896 163.31 528.896 135.708C528.896 107.31 545.374 87.4047 568.874 87.4047C591.293 87.4047 607.23 107.841 607.23 136.77C607.23 163.841 591.293 182.685 568.874 182.685Z" fill="#001408"/>
+                    <path d="M653.555 156.675C653.555 181.889 676.244 208.695 721.624 208.695C767.274 208.695 783.751 182.42 783.751 161.983C783.751 130.666 746.205 125.092 721.084 120.315C704.066 117.395 693.262 115.007 693.262 105.452C693.262 94.5706 705.417 87.6701 718.383 87.6701C735.94 87.6701 742.693 99.6133 743.233 112.353H778.349C778.349 91.6511 763.492 61.9258 717.572 61.9258C677.865 61.9258 658.147 83.9544 658.147 107.575C658.147 141.282 696.233 144.732 721.354 149.509C735.94 152.163 748.636 155.348 748.636 165.699C748.636 176.05 736.21 182.95 722.975 182.95C710.549 182.95 688.67 176.05 688.67 156.675H653.555Z" fill="#001408"/>
+                    <path d="M191.339 48.6576C176.921 48.6576 166.578 38.4949 166.578 24.6368C166.578 10.7786 176.921 0 191.339 0C205.13 0 216.1 10.7786 216.1 24.6368C216.1 38.4949 205.13 48.6576 191.339 48.6576Z" fill="#001408"/>
+                </svg>
+            </div>
+            <h1>Monthly video + demand gen report</h1>
+            <div class="subtitle">Google Ads &middot; Account 296-555-7823</div>
+        </div>
+        <div class="pill">Updated Feb 25, 2026</div>
+    </div>
+
+    <!-- ═══════════ TL;DR ═══════════ -->
+    <div class="tldr">
+        <div class="tldr-header">
+            <h2>February vs January</h2>
+            <span class="pill pill-light">TL;DR</span>
+        </div>
+
+        <div class="tldr-metrics">
+            <div class="tldr-metric">
+                <div class="metric-label">Spend</div>
+                <div class="metric-row">
+                    <span class="metric-value">$4,714</span>
+                    <span class="metric-change down">+20.5%</span>
+                </div>
+                <div class="metric-sub">Jan: $3,912</div>
+            </div>
+            <div class="tldr-metric">
+                <div class="metric-label">CTR</div>
+                <div class="metric-row">
+                    <span class="metric-value">0.83%</span>
+                    <span class="metric-change up">+0.40pp</span>
+                </div>
+                <div class="metric-sub">Jan: 0.43%</div>
+            </div>
+            <div class="tldr-metric">
+                <div class="metric-label">CPL</div>
+                <div class="metric-row">
+                    <span class="metric-value">$377.76</span>
+                    <span class="metric-change down">+83.5%</span>
+                </div>
+                <div class="metric-sub">Jan: $205.91</div>
+            </div>
+            <div class="tldr-metric">
+                <div class="metric-label">MQL CVR</div>
+                <div class="metric-row">
+                    <span class="metric-value">0%</span>
+                    <span class="metric-change down">-20.5pp</span>
+                </div>
+                <div class="metric-sub">Jan: 20.5% (3.9 of 19 leads)</div>
+            </div>
+            <div class="tldr-metric">
+                <div class="metric-label">CPMQL</div>
+                <div class="metric-row">
+                    <span class="metric-value">--</span>
+                    <span class="metric-change down">0 MQLs</span>
+                </div>
+                <div class="metric-sub">Jan: $995.51 (3.9 MQLs)</div>
+            </div>
+        </div>
+
+        <div class="tldr-focus">
+            <h3>3 areas to focus on</h3>
+            <ol class="focus-list">
+                <li>
+                    <span class="focus-num">1</span>
+                    <span class="focus-text"><strong>Zero MQLs in Feb despite 12.5 leads.</strong> January converted 21% of leads to MQL. Something broke in the funnel -- review lead quality by campaign and check if audience targeting or creative changed. If the same leads aren't qualifying, the spend is wasted.</span>
+                </li>
+                <li>
+                    <span class="focus-num">2</span>
+                    <span class="focus-text"><strong>Video-viewers retargeting launched at $1,191 per lead.</strong> This new campaign spent $1.2K in Feb for a single lead. It's early, but test different creatives and tighten the retargeting window before scaling budget. Compare performance against the website-visitors retargeting ($345 CPL) to set a realistic target.</span>
+                </li>
+                <li>
+                    <span class="focus-num">3</span>
+                    <span class="focus-text"><strong>MOF Cold CPL jumped 64% while impressions dropped 74%.</strong> Jan delivered 13 leads at $175 CPL across 243K impressions. Feb dropped to 7.5 leads at $286 CPL with only 63K impressions. Check for audience fatigue, frequency caps, or bid strategy changes that may be throttling reach and driving up costs.</span>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ═══════════ Feb 2026 ═══════════ -->
+    <div class="table-section">
+        <div class="table-header">
+            <h2>February 2026</h2>
+            <span class="pill">3 active campaigns</span>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Campaign</th>
+                        <th>Spend</th>
+                        <th>Impressions</th>
+                        <th>Clicks</th>
+                        <th>CTR</th>
+                        <th>Lead</th>
+                        <th>CVR</th>
+                        <th>CPL</th>
+                        <th>MQL</th>
+                        <th>MQL CVR</th>
+                        <th>CPMQL</th>
+                        <th>S1</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="campaign">NA_en_Google_BOF_DemandGen_Retargeting_Website-visitors</td>
+                        <td class="spend">$1,374.42</td>
+                        <td>15,711</td>
+                        <td>139</td>
+                        <td class="rate">0.88%</td>
+                        <td class="lead-val">4.0</td>
+                        <td class="rate">2.88%</td>
+                        <td class="cost-metric">$343.61</td>
+                        <td class="mql-val">0</td>
+                        <td class="rate">0%</td>
+                        <td class="cost-metric">--</td>
+                        <td class="s1-val">0</td>
+                    </tr>
+                    <tr>
+                        <td class="campaign">NA_en_Google_MOF_DemandGen_Cold</td>
+                        <td class="spend">$2,148.57</td>
+                        <td>62,678</td>
+                        <td>535</td>
+                        <td class="rate">0.85%</td>
+                        <td class="lead-val">7.5</td>
+                        <td class="rate">1.40%</td>
+                        <td class="cost-metric">$286.48</td>
+                        <td class="mql-val">0</td>
+                        <td class="rate">0%</td>
+                        <td class="cost-metric">--</td>
+                        <td class="s1-val">0</td>
+                    </tr>
+                    <tr>
+                        <td class="campaign">NA_en_Google_MOF_DemandGen_Retargeting_Video-viewers</td>
+                        <td class="spend">$1,191.41</td>
+                        <td>53,346</td>
+                        <td>419</td>
+                        <td class="rate">0.79%</td>
+                        <td class="lead-val">1.0</td>
+                        <td class="rate">0.24%</td>
+                        <td class="cost-metric">$1,191.41</td>
+                        <td class="mql-val">0</td>
+                        <td class="rate">0%</td>
+                        <td class="cost-metric">--</td>
+                        <td class="s1-val">0</td>
+                    </tr>
+                    <tr class="totals-row">
+                        <td class="campaign">Total</td>
+                        <td class="spend">$4,714.40</td>
+                        <td>131,735</td>
+                        <td>1,093</td>
+                        <td class="rate">0.83%</td>
+                        <td class="lead-val">12.5</td>
+                        <td class="rate">1.14%</td>
+                        <td class="cost-metric">$377.15</td>
+                        <td class="mql-val">0</td>
+                        <td class="rate">0%</td>
+                        <td class="cost-metric">--</td>
+                        <td class="s1-val">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ═══════════ Jan 2026 ═══════════ -->
+    <div class="table-section">
+        <div class="table-header">
+            <h2>January 2026</h2>
+            <span class="pill">3 active campaigns</span>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Campaign</th>
+                        <th>Spend</th>
+                        <th>Impressions</th>
+                        <th>Clicks</th>
+                        <th>CTR</th>
+                        <th>Lead</th>
+                        <th>CVR</th>
+                        <th>CPL</th>
+                        <th>MQL</th>
+                        <th>MQL CVR</th>
+                        <th>CPMQL</th>
+                        <th>S1</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="campaign">NA_en_Google_BOF_DemandGen_Retargeting_Website-visitors</td>
+                        <td class="spend">$1,520.35</td>
+                        <td>74,113</td>
+                        <td>536</td>
+                        <td class="rate">0.72%</td>
+                        <td class="lead-val">6.0</td>
+                        <td class="rate">1.12%</td>
+                        <td class="cost-metric">$253.39</td>
+                        <td class="mql-val">1.9</td>
+                        <td class="rate">31.67%</td>
+                        <td class="cost-metric">$800.18</td>
+                        <td class="s1-val">1.0</td>
+                    </tr>
+                    <tr>
+                        <td class="campaign">NA_en_Google_MOF_DemandGen_Cold</td>
+                        <td class="spend">$2,279.82</td>
+                        <td>242,826</td>
+                        <td>1,110</td>
+                        <td class="rate">0.46%</td>
+                        <td class="lead-val">13.0</td>
+                        <td class="rate">1.17%</td>
+                        <td class="cost-metric">$175.37</td>
+                        <td class="mql-val">2.0</td>
+                        <td class="rate">15.38%</td>
+                        <td class="cost-metric">$1,139.91</td>
+                        <td class="s1-val">0</td>
+                    </tr>
+                    <tr>
+                        <td class="campaign">yt_in-feed_cold</td>
+                        <td class="spend">$112.20</td>
+                        <td>70,079</td>
+                        <td>0</td>
+                        <td class="rate">0%</td>
+                        <td class="lead-val">0</td>
+                        <td class="rate">--</td>
+                        <td class="cost-metric">--</td>
+                        <td class="mql-val">0</td>
+                        <td class="rate">--</td>
+                        <td class="cost-metric">--</td>
+                        <td class="s1-val">0</td>
+                    </tr>
+                    <tr class="totals-row">
+                        <td class="campaign">Total</td>
+                        <td class="spend">$3,912.37</td>
+                        <td>387,018</td>
+                        <td>1,646</td>
+                        <td class="rate">0.43%</td>
+                        <td class="lead-val">19.0</td>
+                        <td class="rate">1.15%</td>
+                        <td class="cost-metric">$205.91</td>
+                        <td class="mql-val">3.9</td>
+                        <td class="rate">20.53%</td>
+                        <td class="cost-metric">$1,003.17</td>
+                        <td class="s1-val">1.0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>Google Ads API</span>
+        <span class="dot"></span>
+        <span>Video + Demand Gen</span>
+        <span class="dot"></span>
+        <span>AirOps</span>
+    </div>
+
+</body>
+</html>
