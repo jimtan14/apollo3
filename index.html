@@ -47,6 +47,137 @@
         .header .subtitle { font-family: var(--font-sans); font-size: 14px; color: var(--text-secondary); margin-top: 4px; }
         .pill { display: inline-flex; align-items: center; padding: 4px 10px; background: var(--accent-label); border: 1px solid var(--stroke-green); border-radius: 0; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--near-black); white-space: nowrap; }
 
+        /* ── TL;DR Section ── */
+        .tldr {
+            background: var(--green-600);
+            border: 1px solid var(--stroke-green);
+            border-radius: 0;
+            padding: 32px;
+            margin-bottom: 32px;
+            color: var(--white);
+        }
+        .tldr-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .tldr-header h2 {
+            font-family: var(--font-serif);
+            font-size: 28px;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: var(--white);
+        }
+        .tldr-header .pill-light {
+            background: var(--accent-highlight);
+            color: var(--near-black);
+            border: none;
+        }
+        .tldr-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        .tldr-metric {
+            background: rgba(255,255,255,0.08);
+            padding: 16px 20px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 0;
+        }
+        .tldr-metric .metric-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 6px;
+        }
+        .tldr-metric .metric-row {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .tldr-metric .metric-value {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: var(--white);
+        }
+        .tldr-metric .metric-change {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+        }
+        .tldr-metric .metric-change.up { color: var(--accent-highlight); }
+        .tldr-metric .metric-change.down { color: #ff6b6b; }
+        .tldr-metric .metric-sub {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 4px;
+        }
+        .tldr-focus {
+            border-top: 1px solid rgba(255,255,255,0.12);
+            padding-top: 24px;
+        }
+        .tldr-focus h3 {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--accent-highlight);
+            margin-bottom: 16px;
+        }
+        .focus-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .focus-list li {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .focus-num {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            background: var(--accent-highlight);
+            color: var(--near-black);
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .focus-text {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.85);
+        }
+        .focus-text strong {
+            color: var(--white);
+        }
+
+        @media (max-width: 960px) {
+            .tldr-metrics { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .tldr { padding: 20px; }
+            .tldr-metrics { grid-template-columns: 1fr; }
+            .tldr-metric .metric-value { font-size: 20px; }
+        }
+
         .table-section { background: var(--white); border: 1px solid var(--stroke-green); border-radius: 0; overflow: hidden; margin-bottom: 32px; }
         .table-header { padding: 24px; border-bottom: 1px solid var(--stroke-green); display: flex; align-items: center; justify-content: space-between; }
         .table-header h2 { font-family: var(--font-serif); font-size: 28px; font-weight: 400; letter-spacing: -0.02em; color: var(--near-black); }
@@ -102,6 +233,67 @@
             <div class="subtitle">Google Ads &middot; Account 296-555-7823</div>
         </div>
         <div class="pill">Updated Feb 25, 2026</div>
+    </div>
+
+    <!-- ═══════════ TL;DR ═══════════ -->
+    <div class="tldr">
+        <div class="tldr-header">
+            <h2>February vs January</h2>
+            <span class="pill pill-light">TL;DR</span>
+        </div>
+
+        <div class="tldr-metrics">
+            <div class="tldr-metric">
+                <div class="metric-label">Spend</div>
+                <div class="metric-row">
+                    <span class="metric-value">$47,629</span>
+                    <span class="metric-change down">+27.8%</span>
+                </div>
+                <div class="metric-sub">Jan: $37,264</div>
+            </div>
+            <div class="tldr-metric">
+                <div class="metric-label">CTR</div>
+                <div class="metric-row">
+                    <span class="metric-value">7.85%</span>
+                    <span class="metric-change up">+0.45pp</span>
+                </div>
+                <div class="metric-sub">Jan: 7.40%</div>
+            </div>
+            <div class="tldr-metric">
+                <div class="metric-label">CPL</div>
+                <div class="metric-row">
+                    <span class="metric-value">$125.84</span>
+                    <span class="metric-change down">+50.5%</span>
+                </div>
+                <div class="metric-sub">Jan: $83.60</div>
+            </div>
+            <div class="tldr-metric">
+                <div class="metric-label">CPMQL</div>
+                <div class="metric-row">
+                    <span class="metric-value">$641.04</span>
+                    <span class="metric-change down">+100.7%</span>
+                </div>
+                <div class="metric-sub">Jan: $319.32</div>
+            </div>
+        </div>
+
+        <div class="tldr-focus">
+            <h3>3 areas to focus on</h3>
+            <ol class="focus-list">
+                <li>
+                    <span class="focus-num">1</span>
+                    <span class="focus-text"><strong>NA Brand spend jumped 10x ($1.4K to $15K)</strong> and now accounts for 31% of total budget. CPL held at $79, but the budget cap flag suggests it could scale further. Validate whether the incremental leads at this spend level are converting downstream before raising the ceiling.</span>
+                </li>
+                <li>
+                    <span class="focus-num">2</span>
+                    <span class="focus-text"><strong>NonBrand Competitor CPLs are unsustainable.</strong> NA Tier 1 is at $1,050/lead and NA Tier 2 at $2,379/MQL. These campaigns eat 28% of spend but deliver under 10% of leads. Consider reallocating budget toward Generic AEO and Brand campaigns where CPL is 3--5x more efficient.</span>
+                </li>
+                <li>
+                    <span class="focus-num">3</span>
+                    <span class="focus-text"><strong>MQL conversion rate dropped from 26% to 20%.</strong> More leads are entering the funnel but fewer are qualifying. Review lead quality by campaign -- paused legacy campaigns (Branded, AI Search Visibility) had the highest MQL CVR in Jan. Reactivating them or shifting budget could restore efficiency.</span>
+                </li>
+            </ol>
+        </div>
     </div>
 
     <!-- ═══════════ Feb 2026 ═══════════ -->
