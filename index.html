@@ -3,120 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Ads - Monthly Video Campaign Report</title>
+    <title>Monthly video campaign report -- AirOps</title>
     <style>
-        * {
+        /* ── Fonts ── */
+        @font-face {
+            font-family: 'Serrif VF';
+            src: url('fonts/SerrifVF.ttf') format('truetype');
+            font-weight: 100 900;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Saans';
+            src: url('fonts/Saans-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Saans';
+            src: url('fonts/Saans-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Saans';
+            src: url('fonts/Saans-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Saans Mono';
+            src: url('fonts/SaansMono-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        /* ── Tokens ── */
+        :root {
+            --white: #ffffff;
+            --off-white: #F8FFFA;
+            --near-black: #000d05;
+            --green-50: #f8fffb;
+            --green-100: #dfeae3;
+            --green-200: #CCFFE0;
+            --green-500: #008c44;
+            --green-600: #002910;
+            --interaction: #00ff64;
+            --accent-label: #EEFF8C;
+            --accent-highlight: #00e676;
+
+            --text-primary: #09090b;
+            --text-secondary: #676c79;
+            --text-tertiary: #a5aab6;
+
+            --stroke-primary: #ecedef;
+            --stroke-green: #d4e8da;
+
+            --font-sans: 'Saans', 'Helvetica Neue', sans-serif;
+            --font-serif: 'Serrif VF', Georgia, serif;
+            --font-mono: 'Saans Mono', 'DM Mono', monospace;
+
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-12: 48px;
+            --space-16: 64px;
+        }
+
+        /* ── Reset ── */
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
-            background: #f0f2f5;
-            color: #1a1a2e;
-            padding: 32px;
+            font-family: var(--font-sans);
+            background: var(--off-white);
+            color: var(--text-primary);
+            padding: var(--space-12);
+            line-height: 1.5;
         }
 
+        /* ── Header ── */
         .header {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
-            margin-bottom: 32px;
+            margin-bottom: var(--space-12);
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-1);
+        }
+
+        .logo svg {
+            height: 28px;
+            width: auto;
         }
 
         .header h1 {
-            font-size: 28px;
-            font-weight: 700;
-            color: #1a1a2e;
+            font-family: var(--font-serif);
+            font-size: 40px;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.04;
+            color: var(--near-black);
+            margin-top: var(--space-4);
         }
 
         .header .subtitle {
+            font-family: var(--font-sans);
             font-size: 14px;
-            color: #6b7280;
-            margin-top: 4px;
+            color: var(--text-secondary);
+            margin-top: var(--space-1);
         }
 
-        .header .badge {
-            background: #e0e7ff;
-            color: #4338ca;
-            font-size: 13px;
-            font-weight: 600;
-            padding: 6px 14px;
-            border-radius: 20px;
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            background: var(--accent-label);
+            border: 1px solid var(--stroke-green);
+            border-radius: 0;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--near-black);
+            white-space: nowrap;
         }
 
-        /* Summary Cards */
+        .pill.type-video {
+            background: var(--green-200);
+        }
+
+        .pill.type-demandgen {
+            background: var(--accent-label);
+        }
+
+        /* ── Summary Cards ── */
         .summary-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
-            margin-bottom: 32px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: var(--space-4);
+            margin-bottom: var(--space-12);
         }
 
         .card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 20px 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            background: var(--white);
+            border: 1px solid var(--stroke-green);
+            border-radius: 0;
+            padding: var(--space-6);
         }
 
         .card .label {
-            font-size: 12px;
-            font-weight: 600;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #6b7280;
-            margin-bottom: 8px;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-3);
         }
 
         .card .value {
-            font-size: 28px;
-            font-weight: 700;
+            font-family: var(--font-serif);
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: var(--near-black);
         }
 
-        .card .change {
+        .card .meta {
+            font-family: var(--font-sans);
             font-size: 12px;
-            margin-top: 6px;
-            color: #6b7280;
+            color: var(--text-tertiary);
+            margin-top: var(--space-2);
         }
 
-        .card.spend .value { color: #4338ca; }
-        .card.impressions .value { color: #0891b2; }
-        .card.clicks .value { color: #059669; }
-        .card.lead .value { color: #d97706; }
-        .card.mql .value { color: #dc2626; }
-        .card.s2 .value { color: #7c3aed; }
+        .card.highlight {
+            background: var(--green-600);
+        }
 
-        /* Table Section */
+        .card.highlight .label {
+            color: var(--accent-highlight);
+        }
+
+        .card.highlight .value {
+            color: var(--white);
+        }
+
+        .card.highlight .meta {
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* ── Campaign Section ── */
+        .campaign-section {
+            margin-bottom: var(--space-8);
+        }
+
+        .campaign-section:last-of-type {
+            margin-bottom: var(--space-12);
+        }
+
         .table-section {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            background: var(--white);
+            border: 1px solid var(--stroke-green);
+            border-radius: 0;
             overflow: hidden;
-            margin-bottom: 32px;
         }
 
         .table-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid #e5e7eb;
+            padding: var(--space-6);
+            border-bottom: 1px solid var(--stroke-green);
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: var(--space-4);
+            flex-wrap: wrap;
         }
 
         .table-header h2 {
+            font-family: var(--font-sans);
             font-size: 18px;
             font-weight: 600;
+            color: var(--near-black);
         }
 
-        .table-header .campaign-tag {
-            background: #f3f4f6;
-            color: #374151;
-            font-size: 13px;
-            font-weight: 500;
-            padding: 4px 12px;
-            border-radius: 6px;
+        .table-header-pills {
+            display: flex;
+            gap: var(--space-2);
         }
 
         table {
@@ -126,14 +248,15 @@
 
         thead th {
             text-align: left;
-            padding: 14px 24px;
-            font-size: 12px;
-            font-weight: 600;
+            padding: var(--space-3) var(--space-6);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #6b7280;
-            background: #f9fafb;
-            border-bottom: 1px solid #e5e7eb;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            background: var(--green-50);
+            border-bottom: 1px solid var(--stroke-green);
         }
 
         thead th:not(:first-child) {
@@ -141,9 +264,11 @@
         }
 
         tbody td {
-            padding: 16px 24px;
+            padding: var(--space-4) var(--space-6);
+            font-family: var(--font-sans);
             font-size: 14px;
-            border-bottom: 1px solid #f3f4f6;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--stroke-primary);
         }
 
         tbody td:not(:first-child) {
@@ -152,7 +277,7 @@
         }
 
         tbody tr:hover {
-            background: #f9fafb;
+            background: var(--green-50);
         }
 
         tbody tr:last-child td {
@@ -160,157 +285,447 @@
         }
 
         td.month-cell {
-            font-weight: 600;
-            color: #1a1a2e;
+            font-weight: 500;
+            color: var(--near-black);
         }
 
-        td.spend { color: #4338ca; font-weight: 600; }
-        td.impressions { color: #0891b2; }
-        td.clicks { color: #059669; }
-        td.lead { color: #d97706; }
-        td.mql { color: #dc2626; }
-        td.s2 { color: #7c3aed; }
+        td.spend {
+            color: var(--green-500);
+            font-weight: 600;
+        }
 
-        /* Totals row */
+        td.lead-val {
+            color: var(--near-black);
+            font-weight: 600;
+        }
+
+        td.mql-val {
+            color: var(--green-500);
+            font-weight: 600;
+        }
+
+        td.s2-val {
+            color: var(--text-secondary);
+        }
+
+        /* ── Totals Row ── */
         tbody tr.totals-row {
-            background: #f9fafb;
-            font-weight: 700;
+            background: var(--green-600);
         }
 
         tbody tr.totals-row td {
-            border-top: 2px solid #e5e7eb;
+            color: var(--white);
+            font-weight: 700;
+            border-top: 2px solid var(--stroke-green);
             border-bottom: none;
             padding-top: 18px;
             padding-bottom: 18px;
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            font-size: 12px;
-            color: #9ca3af;
-            padding-top: 8px;
+        tbody tr.totals-row td.spend {
+            color: var(--accent-highlight);
         }
 
-        .footer span {
+        tbody tr.totals-row td.lead-val,
+        tbody tr.totals-row td.mql-val,
+        tbody tr.totals-row td.s2-val {
+            color: var(--white);
+        }
+
+        tbody tr.totals-row:hover {
+            background: var(--green-600);
+        }
+
+        /* ── Section Divider ── */
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
             font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-4);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            body { padding: 16px; }
-            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
-            table { font-size: 13px; }
-            thead th, tbody td { padding: 12px 14px; }
-            .card .value { font-size: 22px; }
+        /* ── Footer ── */
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-tertiary);
+            padding-top: var(--space-4);
+        }
+
+        .footer .dot {
+            width: 3px;
+            height: 3px;
+            background: var(--text-tertiary);
+            display: inline-block;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 960px) {
+            .summary-cards {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            body { padding: var(--space-4); }
+            .header { flex-direction: column; gap: var(--space-3); }
+            .header h1 { font-size: 28px; }
+            .summary-cards { grid-template-columns: repeat(2, 1fr); }
+            .card .value { font-size: 24px; }
+            thead th, tbody td { padding: var(--space-3) var(--space-3); font-size: 12px; }
+            .table-header { padding: var(--space-4); }
+            .table-header h2 { font-size: 15px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Header -->
     <div class="header">
-        <div>
-            <h1>Monthly Video Campaign Report</h1>
-            <div class="subtitle">AirOps &middot; Google Ads &middot; Account ID: 296-555-7823</div>
+        <div class="header-left">
+            <div class="logo">
+                <svg viewBox="0 0 784 252" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M111.828 65.6415V88.4663C101.564 72.0112 85.627 61.9258 65.9084 61.9258C23.7703 61.9258 0 92.9782 0 134.647C0 176.581 24.0404 208.695 66.4487 208.695C86.1672 208.695 101.834 198.609 111.828 182.154V204.979H144.782V65.6415H111.828ZM72.9315 181.093C48.8911 181.093 35.1152 159.064 35.1152 134.647C35.1152 110.76 48.621 89.7933 73.4717 89.7933C94.0006 89.7933 111.558 104.391 111.558 134.116C111.558 163.31 94.8109 181.093 72.9315 181.093Z" fill="#001408"/>
+                    <path d="M173.137 65.6494V204.987H208.252V65.6494H173.137Z" fill="#001408"/>
+                    <path d="M272.998 100.141V65.6386H237.883V204.976H272.998V125.355C272.998 104.919 287.314 96.691 300.82 96.691C308.653 96.691 316.757 98.8143 321.079 100.407V63.25C298.119 63.25 279.211 76.7856 272.998 100.141Z" fill="#001408"/>
+                    <path d="M329.629 108.115C329.629 151.377 359.882 182.163 403.371 182.163C447.13 182.163 477.115 151.377 477.115 108.115C477.115 65.6507 447.13 35.3945 403.371 35.3945C359.882 35.3945 329.629 65.6507 329.629 108.115ZM441.997 108.115C441.997 135.187 427.141 154.561 403.371 154.561C379.33 154.561 364.744 135.187 364.744 108.115C364.744 82.1058 379.33 63.2621 403.371 63.2621C427.141 63.2621 441.997 82.1058 441.997 108.115Z" fill="#001408"/>
+                    <path d="M575.086 61.9258C554.557 61.9258 537.81 73.869 528.896 92.9782V65.6415H493.781V251.425H528.896V180.031C538.891 197.282 557.529 208.695 577.247 208.695C615.604 208.695 642.345 179.235 642.345 137.035C642.345 92.7128 614.523 61.9258 575.086 61.9258ZM568.874 182.685C545.374 182.685 528.896 163.31 528.896 135.708C528.896 107.31 545.374 87.4047 568.874 87.4047C591.293 87.4047 607.23 107.841 607.23 136.77C607.23 163.841 591.293 182.685 568.874 182.685Z" fill="#001408"/>
+                    <path d="M653.555 156.675C653.555 181.889 676.244 208.695 721.624 208.695C767.274 208.695 783.751 182.42 783.751 161.983C783.751 130.666 746.205 125.092 721.084 120.315C704.066 117.395 693.262 115.007 693.262 105.452C693.262 94.5706 705.417 87.6701 718.383 87.6701C735.94 87.6701 742.693 99.6133 743.233 112.353H778.349C778.349 91.6511 763.492 61.9258 717.572 61.9258C677.865 61.9258 658.147 83.9544 658.147 107.575C658.147 141.282 696.233 144.732 721.354 149.509C735.94 152.163 748.636 155.348 748.636 165.699C748.636 176.05 736.21 182.95 722.975 182.95C710.549 182.95 688.67 176.05 688.67 156.675H653.555Z" fill="#001408"/>
+                    <path d="M191.339 48.6576C176.921 48.6576 166.578 38.4949 166.578 24.6368C166.578 10.7786 176.921 0 191.339 0C205.13 0 216.1 10.7786 216.1 24.6368C216.1 38.4949 205.13 48.6576 191.339 48.6576Z" fill="#001408"/>
+                </svg>
+            </div>
+            <h1>Monthly video campaign report</h1>
+            <div class="subtitle">Google Ads &middot; Account 296-555-7823 &middot; Oct 2025 -- Feb 2026</div>
         </div>
-        <div class="badge">Last Updated: Feb 25, 2026</div>
+        <div class="pill">Updated Feb 25, 2026</div>
     </div>
 
-    <!-- Summary Cards (Totals across all months) -->
+    <!-- Summary Cards (All campaigns combined) -->
+    <div class="section-label">All video + demand gen campaigns</div>
     <div class="summary-cards">
-        <div class="card spend">
-            <div class="label">Total Spend</div>
-            <div class="value">$697.64</div>
-            <div class="change">Nov 2025 &ndash; Jan 2026</div>
+        <div class="card highlight">
+            <div class="label">Total spend</div>
+            <div class="value">$17,237</div>
+            <div class="meta">4 campaigns, 5 months</div>
         </div>
-        <div class="card impressions">
-            <div class="label">Total Impressions</div>
-            <div class="value">318,057</div>
-            <div class="change">Nov 2025 &ndash; Jan 2026</div>
+        <div class="card">
+            <div class="label">Impressions</div>
+            <div class="value">1.59M</div>
+            <div class="meta">Oct 2025 -- Feb 2026</div>
         </div>
-        <div class="card clicks">
-            <div class="label">Total Clicks</div>
-            <div class="value">9</div>
-            <div class="change">Nov 2025 &ndash; Jan 2026</div>
+        <div class="card">
+            <div class="label">Clicks</div>
+            <div class="value">7,594</div>
+            <div class="meta">0.48% avg CTR</div>
         </div>
-        <div class="card lead">
-            <div class="label">Leads</div>
-            <div class="value">0</div>
-            <div class="change">No conversions recorded</div>
+        <div class="card">
+            <div class="label">Lead</div>
+            <div class="value">48.5</div>
+            <div class="meta">$355 avg CPL</div>
         </div>
-        <div class="card mql">
-            <div class="label">MQLs</div>
-            <div class="value">0</div>
-            <div class="change">No conversions recorded</div>
+        <div class="card">
+            <div class="label">MQL</div>
+            <div class="value">16.2</div>
+            <div class="meta">$1,064 avg cost/MQL</div>
         </div>
-        <div class="card s2">
+        <div class="card">
             <div class="label">S2</div>
             <div class="value">0</div>
-            <div class="change">No conversions recorded</div>
+            <div class="meta">No S2 conversions yet</div>
         </div>
     </div>
 
-    <!-- Monthly Breakdown Table -->
-    <div class="table-section">
-        <div class="table-header">
-            <h2>Monthly Breakdown</h2>
-            <span class="campaign-tag">yt_in-feed_cold</span>
+    <!-- Campaign 1: MOF DemandGen Cold -->
+    <div class="campaign-section">
+        <div class="table-section">
+            <div class="table-header">
+                <h2>NA_en_Google_MOF_DemandGen_Cold</h2>
+                <div class="table-header-pills">
+                    <span class="pill type-demandgen">Demand Gen</span>
+                    <span class="pill">Enabled</span>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Spend</th>
+                        <th>Impressions</th>
+                        <th>Clicks</th>
+                        <th>Lead</th>
+                        <th>MQL</th>
+                        <th>S2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="month-cell">Feb 2026</td>
+                        <td class="spend">$2,148.57</td>
+                        <td>62,673</td>
+                        <td>535</td>
+                        <td class="lead-val">7.5</td>
+                        <td class="mql-val">0</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                    <tr>
+                        <td class="month-cell">Jan 2026</td>
+                        <td class="spend">$2,279.82</td>
+                        <td>242,826</td>
+                        <td>1,110</td>
+                        <td class="lead-val">13</td>
+                        <td class="mql-val">2</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                    <tr>
+                        <td class="month-cell">Dec 2025</td>
+                        <td class="spend">$2,123.39</td>
+                        <td>336,410</td>
+                        <td>1,510</td>
+                        <td class="lead-val">4</td>
+                        <td class="mql-val">3.09</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                    <tr>
+                        <td class="month-cell">Nov 2025</td>
+                        <td class="spend">$2,274.43</td>
+                        <td>239,182</td>
+                        <td>1,291</td>
+                        <td class="lead-val">5</td>
+                        <td class="mql-val">5</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                    <tr>
+                        <td class="month-cell">Oct 2025</td>
+                        <td class="spend">$1,125.41</td>
+                        <td>86,018</td>
+                        <td>1,084</td>
+                        <td class="lead-val">3</td>
+                        <td class="mql-val">1</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                    <tr class="totals-row">
+                        <td class="month-cell">Total</td>
+                        <td class="spend">$9,951.62</td>
+                        <td>967,109</td>
+                        <td>5,530</td>
+                        <td class="lead-val">32.5</td>
+                        <td class="mql-val">11.09</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Month</th>
-                    <th>Spend</th>
-                    <th>Impressions</th>
-                    <th>Clicks</th>
-                    <th>Lead</th>
-                    <th>MQL</th>
-                    <th>S2</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="month-cell">Jan 2026</td>
-                    <td class="spend">$112.20</td>
-                    <td class="impressions">70,079</td>
-                    <td class="clicks">0</td>
-                    <td class="lead">0</td>
-                    <td class="mql">0</td>
-                    <td class="s2">0</td>
-                </tr>
-                <tr>
-                    <td class="month-cell">Dec 2025</td>
-                    <td class="spend">$304.61</td>
-                    <td class="impressions">122,946</td>
-                    <td class="clicks">1</td>
-                    <td class="lead">0</td>
-                    <td class="mql">0</td>
-                    <td class="s2">0</td>
-                </tr>
-                <tr>
-                    <td class="month-cell">Nov 2025</td>
-                    <td class="spend">$280.82</td>
-                    <td class="impressions">125,032</td>
-                    <td class="clicks">8</td>
-                    <td class="lead">0</td>
-                    <td class="mql">0</td>
-                    <td class="s2">0</td>
-                </tr>
-                <tr class="totals-row">
-                    <td class="month-cell">Total</td>
-                    <td class="spend">$697.64</td>
-                    <td class="impressions">318,057</td>
-                    <td class="clicks">9</td>
-                    <td class="lead">0</td>
-                    <td class="mql">0</td>
-                    <td class="s2">0</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 
+    <!-- Campaign 2: BOF DemandGen Retargeting Website-visitors -->
+    <div class="campaign-section">
+        <div class="table-section">
+            <div class="table-header">
+                <h2>NA_en_Google_BOF_DemandGen_Retargeting_Website-visitors</h2>
+                <div class="table-header-pills">
+                    <span class="pill type-demandgen">Demand Gen</span>
+                    <span class="pill">Enabled</span>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Spend</th>
+                        <th>Impressions</th>
+                        <th>Clicks</th>
+                        <th>Lead</th>
+                        <th>MQL</th>
+                        <th>S2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="month-cell">Feb 2026</td>
+                        <td class="spend">$1,373.79</td>
+                        <td>15,695</td>
+                        <td>140</td>
+                        <td class="lead-val">3.98</td>
+                        <td class="mql-val">0</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                    <tr>
+                        <td class="month-cell">Jan 2026</td>
+                        <td class="spend">$1,520.35</td>
+                        <td>74,113</td>
+                        <td>536</td>
+                        <td class="lead-val">6</td>
+                        <td class="mql-val">1.93</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                    <tr>
+                        <td class="month-cell">Dec 2025</td>
+                        <td class="spend">$1,522.14</td>
+                        <td>124,398</td>
+                        <td>642</td>
+                        <td class="lead-val">3</td>
+                        <td class="mql-val">0.91</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                    <tr>
+                        <td class="month-cell">Nov 2025</td>
+                        <td class="spend">$760.22</td>
+                        <td>31,571</td>
+                        <td>255</td>
+                        <td class="lead-val">1</td>
+                        <td class="mql-val">1</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                    <tr>
+                        <td class="month-cell">Oct 2025</td>
+                        <td class="spend">$220.43</td>
+                        <td>9,931</td>
+                        <td>63</td>
+                        <td class="lead-val">1</td>
+                        <td class="mql-val">1.30</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                    <tr class="totals-row">
+                        <td class="month-cell">Total</td>
+                        <td class="spend">$5,396.93</td>
+                        <td>255,708</td>
+                        <td>1,636</td>
+                        <td class="lead-val">14.98</td>
+                        <td class="mql-val">5.14</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Campaign 3: MOF DemandGen Retargeting Video-viewers -->
+    <div class="campaign-section">
+        <div class="table-section">
+            <div class="table-header">
+                <h2>NA_en_Google_MOF_DemandGen_Retargeting_Video-viewers</h2>
+                <div class="table-header-pills">
+                    <span class="pill type-demandgen">Demand Gen</span>
+                    <span class="pill">Enabled</span>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Spend</th>
+                        <th>Impressions</th>
+                        <th>Clicks</th>
+                        <th>Lead</th>
+                        <th>MQL</th>
+                        <th>S2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="month-cell">Feb 2026</td>
+                        <td class="spend">$1,191.01</td>
+                        <td>53,341</td>
+                        <td>419</td>
+                        <td class="lead-val">1</td>
+                        <td class="mql-val">0</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                    <tr class="totals-row">
+                        <td class="month-cell">Total</td>
+                        <td class="spend">$1,191.01</td>
+                        <td>53,341</td>
+                        <td>419</td>
+                        <td class="lead-val">1</td>
+                        <td class="mql-val">0</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Campaign 4: yt_in-feed_cold -->
+    <div class="campaign-section">
+        <div class="table-section">
+            <div class="table-header">
+                <h2>yt_in-feed_cold</h2>
+                <div class="table-header-pills">
+                    <span class="pill type-video">Video</span>
+                    <span class="pill">Paused</span>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Spend</th>
+                        <th>Impressions</th>
+                        <th>Clicks</th>
+                        <th>Lead</th>
+                        <th>MQL</th>
+                        <th>S2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="month-cell">Jan 2026</td>
+                        <td class="spend">$112.20</td>
+                        <td>70,079</td>
+                        <td>0</td>
+                        <td class="lead-val">0</td>
+                        <td class="mql-val">0</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                    <tr>
+                        <td class="month-cell">Dec 2025</td>
+                        <td class="spend">$304.61</td>
+                        <td>122,946</td>
+                        <td>1</td>
+                        <td class="lead-val">0</td>
+                        <td class="mql-val">0</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                    <tr>
+                        <td class="month-cell">Nov 2025</td>
+                        <td class="spend">$280.82</td>
+                        <td>125,032</td>
+                        <td>8</td>
+                        <td class="lead-val">0</td>
+                        <td class="mql-val">0</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                    <tr class="totals-row">
+                        <td class="month-cell">Total</td>
+                        <td class="spend">$697.63</td>
+                        <td>318,057</td>
+                        <td>9</td>
+                        <td class="lead-val">0</td>
+                        <td class="mql-val">0</td>
+                        <td class="s2-val">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <div class="footer">
-        Data source: <span>Google Ads API</span> &middot; Campaign type: <span>Video</span> &middot; Generated by Claude Code
+        <span>Google Ads API</span>
+        <span class="dot"></span>
+        <span>Video + Demand Gen</span>
+        <span class="dot"></span>
+        <span>AirOps</span>
     </div>
 
 </body>
