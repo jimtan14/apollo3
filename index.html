@@ -196,6 +196,10 @@
         td.s1-val { color: var(--text-secondary); font-weight: 500; }
         td.rate { color: var(--text-secondary); }
         td.cost-metric { color: var(--near-black); }
+        td.better { background-color: rgba(0, 180, 80, 0.10); }
+        td.worse { background-color: rgba(220, 50, 50, 0.10); }
+        tbody tr.totals-row td.better { background-color: rgba(0, 230, 118, 0.18); }
+        tbody tr.totals-row td.worse { background-color: rgba(255, 107, 107, 0.18); }
 
         tbody tr.totals-row { background: var(--green-600); }
         tbody tr.totals-row td { color: var(--white); font-weight: 700; border-top: 2px solid var(--stroke-green); border-bottom: none; padding-top: 18px; padding-bottom: 18px; }
@@ -329,171 +333,183 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- EU Brand: CTR 28.14>25.15 better | CVR 6.22<9.28 worse | CPL 37.46>17.45 worse | MQL 15.5<16.5 worse | MQL CVR 20.53<32.67 worse -->
                     <tr>
                         <td class="campaign">EU_en_Google_BOF_Search_Brand</td>
                         <td class="spend">$2,828.43</td>
                         <td>4,311</td>
                         <td>1,213</td>
-                        <td class="rate">28.14%</td>
+                        <td class="rate better">28.14%</td>
                         <td class="lead-val">75.5</td>
-                        <td class="rate">6.22%</td>
-                        <td class="cost-metric">$37.46</td>
-                        <td class="mql-val">15.5</td>
-                        <td class="rate">20.53%</td>
+                        <td class="rate worse">6.22%</td>
+                        <td class="cost-metric worse">$37.46</td>
+                        <td class="mql-val worse">15.5</td>
+                        <td class="rate worse">20.53%</td>
                         <td class="cost-metric">$182.48</td>
                         <td class="s1-val">21.0</td>
                     </tr>
+                    <!-- EU NonBrand Comp T1: CTR 2.94<3.64 worse | CVR 2.97<4.35 worse | CPL 458>226 worse | MQL 2=2 same | MQL CVR 33.33<40 worse -->
                     <tr>
                         <td class="campaign">EU_en_Google_BOF_Search_NonBrand_Competitors_Tier1</td>
                         <td class="spend">$2,750.36</td>
                         <td>6,864</td>
                         <td>202</td>
-                        <td class="rate">2.94%</td>
+                        <td class="rate worse">2.94%</td>
                         <td class="lead-val">6.0</td>
-                        <td class="rate">2.97%</td>
-                        <td class="cost-metric">$458.39</td>
+                        <td class="rate worse">2.97%</td>
+                        <td class="cost-metric worse">$458.39</td>
                         <td class="mql-val">2.0</td>
-                        <td class="rate">33.33%</td>
+                        <td class="rate worse">33.33%</td>
                         <td class="cost-metric">$1,375.18</td>
                         <td class="s1-val">1.0</td>
                     </tr>
+                    <!-- EU NonBrand Comp T2: CTR 5.99>4.35 better | CVR 4.91<6.33 worse | CPL 130>98 worse | MQL 3>1 better | MQL CVR 17.65>10.53 better -->
                     <tr>
                         <td class="campaign">EU_en_Google_BOF_Search_NonBrand_Competitors_Tier2</td>
                         <td class="spend">$2,202.79</td>
                         <td>5,776</td>
                         <td>346</td>
-                        <td class="rate">5.99%</td>
+                        <td class="rate better">5.99%</td>
                         <td class="lead-val">17.0</td>
-                        <td class="rate">4.91%</td>
-                        <td class="cost-metric">$129.58</td>
-                        <td class="mql-val">3.0</td>
-                        <td class="rate">17.65%</td>
+                        <td class="rate worse">4.91%</td>
+                        <td class="cost-metric worse">$129.58</td>
+                        <td class="mql-val better">3.0</td>
+                        <td class="rate better">17.65%</td>
                         <td class="cost-metric">$734.26</td>
                         <td class="s1-val">2.0</td>
                     </tr>
+                    <!-- EU NonBrand Generic AEO: CTR 4.23<4.27 worse | CVR 4.43<4.64 worse | CPL 105>89 worse | MQL 2<5 worse | MQL CVR 7.55<38.46 worse -->
                     <tr>
                         <td class="campaign">EU_en_Google_BOF_Search_NonBrand_Generic_AEO</td>
                         <td class="spend">$2,781.81</td>
                         <td>14,126</td>
                         <td>598</td>
-                        <td class="rate">4.23%</td>
+                        <td class="rate worse">4.23%</td>
                         <td class="lead-val">26.5</td>
-                        <td class="rate">4.43%</td>
-                        <td class="cost-metric">$104.97</td>
-                        <td class="mql-val">2.0</td>
-                        <td class="rate">7.55%</td>
+                        <td class="rate worse">4.43%</td>
+                        <td class="cost-metric worse">$104.97</td>
+                        <td class="mql-val worse">2.0</td>
+                        <td class="rate worse">7.55%</td>
                         <td class="cost-metric">$1,390.91</td>
                         <td class="s1-val">1.0</td>
                     </tr>
+                    <!-- NA Brand: CTR 24.78<26.02 worse | CVR 6.71>5.79 better | CPL 79>42 worse | MQL 36.7>11 better | MQL CVR 19.47<34.48 worse -->
                     <tr>
                         <td class="campaign">NA_en_Google_BOF_Search_Brand</td>
                         <td class="spend">$14,976.77</td>
                         <td>11,329</td>
                         <td>2,808</td>
-                        <td class="rate">24.78%</td>
+                        <td class="rate worse">24.78%</td>
                         <td class="lead-val">188.5</td>
-                        <td class="rate">6.71%</td>
-                        <td class="cost-metric">$79.45</td>
-                        <td class="mql-val">36.7</td>
-                        <td class="rate">19.47%</td>
+                        <td class="rate better">6.71%</td>
+                        <td class="cost-metric worse">$79.45</td>
+                        <td class="mql-val better">36.7</td>
+                        <td class="rate worse">19.47%</td>
                         <td class="cost-metric">$408.09</td>
                         <td class="s1-val">60.7</td>
                     </tr>
+                    <!-- NA NonBrand Comp T1: CTR 2.90<3.27 worse | CVR 2.62<5.71 worse | CPL 1050>319 worse | MQL 5.1>1 better | MQL CVR 63.75>25 better -->
                     <tr>
                         <td class="campaign">NA_en_Google_BOF_Search_NonBrand_Competitors_Tier1</td>
                         <td class="spend">$8,402.03</td>
                         <td>10,533</td>
                         <td>305</td>
-                        <td class="rate">2.90%</td>
+                        <td class="rate worse">2.90%</td>
                         <td class="lead-val">8.0</td>
-                        <td class="rate">2.62%</td>
-                        <td class="cost-metric">$1,050.25</td>
-                        <td class="mql-val">5.1</td>
-                        <td class="rate">63.75%</td>
+                        <td class="rate worse">2.62%</td>
+                        <td class="cost-metric worse">$1,050.25</td>
+                        <td class="mql-val better">5.1</td>
+                        <td class="rate better">63.75%</td>
                         <td class="cost-metric">$1,647.46</td>
                         <td class="s1-val">4.5</td>
                     </tr>
+                    <!-- NA NonBrand Comp T2: CTR 4.63>2.61 better | CVR 6.37<11.21 worse | CPL 211>122 worse | MQL 2>1 better | MQL CVR 8.89<15.38 worse -->
                     <tr>
                         <td class="campaign">NA_en_Google_BOF_Search_NonBrand_Competitors_Tier2</td>
                         <td class="spend">$4,756.99</td>
                         <td>7,619</td>
                         <td>353</td>
-                        <td class="rate">4.63%</td>
+                        <td class="rate better">4.63%</td>
                         <td class="lead-val">22.5</td>
-                        <td class="rate">6.37%</td>
-                        <td class="cost-metric">$211.42</td>
-                        <td class="mql-val">2.0</td>
-                        <td class="rate">8.89%</td>
+                        <td class="rate worse">6.37%</td>
+                        <td class="cost-metric worse">$211.42</td>
+                        <td class="mql-val better">2.0</td>
+                        <td class="rate worse">8.89%</td>
                         <td class="cost-metric">$2,378.50</td>
                         <td class="s1-val">1.0</td>
                     </tr>
+                    <!-- NA NonBrand Generic AEO: CTR 2.99>2.07 better | CVR 5.52<6.02 worse | CPL 213>168 worse | MQL 6>2.9 better | MQL CVR 21.43<58 worse -->
                     <tr>
                         <td class="campaign">NA_en_Google_BOF_Search_NonBrand_Generic_AEO</td>
                         <td class="spend">$5,968.95</td>
                         <td>16,977</td>
                         <td>507</td>
-                        <td class="rate">2.99%</td>
+                        <td class="rate better">2.99%</td>
                         <td class="lead-val">28.0</td>
-                        <td class="rate">5.52%</td>
-                        <td class="cost-metric">$213.18</td>
-                        <td class="mql-val">6.0</td>
-                        <td class="rate">21.43%</td>
+                        <td class="rate worse">5.52%</td>
+                        <td class="cost-metric worse">$213.18</td>
+                        <td class="mql-val better">6.0</td>
+                        <td class="rate worse">21.43%</td>
                         <td class="cost-metric">$994.83</td>
                         <td class="s1-val">4.4</td>
                     </tr>
+                    <!-- AI Search Visibility: CTR 3.61>3.36 better | CVR 3.50<7.34 worse | CPL 306>165 worse | MQL 1<10.6 worse | MQL CVR 28.57>21.03 better -->
                     <tr>
                         <td class="campaign">Search - AI Search Visibility</td>
                         <td class="spend">$1,072.18</td>
                         <td>2,769</td>
                         <td>100</td>
-                        <td class="rate">3.61%</td>
+                        <td class="rate better">3.61%</td>
                         <td class="lead-val">3.5</td>
-                        <td class="rate">3.50%</td>
-                        <td class="cost-metric">$306.34</td>
-                        <td class="mql-val">1.0</td>
-                        <td class="rate">28.57%</td>
+                        <td class="rate worse">3.50%</td>
+                        <td class="cost-metric worse">$306.34</td>
+                        <td class="mql-val worse">1.0</td>
+                        <td class="rate better">28.57%</td>
                         <td class="cost-metric">$1,072.18</td>
                         <td class="s1-val">1.0</td>
                     </tr>
+                    <!-- Competitors: CTR 3.19<4.00 worse | CVR 2.44<6.22 worse | CPL 788>307 worse | MQL 1<13 worse | MQL CVR 50>32.91 better -->
                     <tr>
                         <td class="campaign">Search - Competitors</td>
                         <td class="spend">$1,576.46</td>
                         <td>2,572</td>
                         <td>82</td>
-                        <td class="rate">3.19%</td>
+                        <td class="rate worse">3.19%</td>
                         <td class="lead-val">2.0</td>
-                        <td class="rate">2.44%</td>
-                        <td class="cost-metric">$788.23</td>
-                        <td class="mql-val">1.0</td>
-                        <td class="rate">50.00%</td>
+                        <td class="rate worse">2.44%</td>
+                        <td class="cost-metric worse">$788.23</td>
+                        <td class="mql-val worse">1.0</td>
+                        <td class="rate better">50.00%</td>
                         <td class="cost-metric">$1,576.46</td>
                         <td class="s1-val">2.6</td>
                     </tr>
+                    <!-- Competitors Legacy: CTR 6.45>6.19 better | CVR 3.33<9.84 worse | CPL 313>100 worse | MQL 0<5 worse | MQL CVR 0<20.83 worse -->
                     <tr>
                         <td class="campaign">Search - Competitors - Legacy</td>
                         <td class="spend">$312.50</td>
                         <td>465</td>
                         <td>30</td>
-                        <td class="rate">6.45%</td>
+                        <td class="rate better">6.45%</td>
                         <td class="lead-val">1.0</td>
-                        <td class="rate">3.33%</td>
-                        <td class="cost-metric">$312.50</td>
-                        <td class="mql-val">0</td>
-                        <td class="rate">0%</td>
+                        <td class="rate worse">3.33%</td>
+                        <td class="cost-metric worse">$312.50</td>
+                        <td class="mql-val worse">0</td>
+                        <td class="rate worse">0%</td>
                         <td class="cost-metric">--</td>
                         <td class="s1-val">0</td>
                     </tr>
+                    <!-- Totals: CTR 7.85>7.40 better | CVR 5.78<7.04 worse | CPL 126>84 worse | MQL 74.3<116.7 worse | MQL CVR 19.63<26.19 worse -->
                     <tr class="totals-row">
                         <td class="campaign">Total</td>
                         <td class="spend">$47,629.27</td>
                         <td>83,341</td>
                         <td>6,544</td>
-                        <td class="rate">7.85%</td>
+                        <td class="rate better">7.85%</td>
                         <td class="lead-val">378.5</td>
-                        <td class="rate">5.78%</td>
-                        <td class="cost-metric">$125.84</td>
-                        <td class="mql-val">74.3</td>
-                        <td class="rate">19.63%</td>
+                        <td class="rate worse">5.78%</td>
+                        <td class="cost-metric worse">$125.84</td>
+                        <td class="mql-val worse">74.3</td>
+                        <td class="rate worse">19.63%</td>
                         <td class="cost-metric">$641.04</td>
                         <td class="s1-val">99.2</td>
                     </tr>
